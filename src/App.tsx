@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+
 function App() {
   const [inputText, setInputText] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -31,40 +32,34 @@ function App() {
     };
 
     setTodos([newTodo,...todos]); //新しいtodoを表示して既存のtodosをその下に表示
-
-    console.log(inputText);
-    console.log(newTodo);
-    console.log(todos);
-    
     setInputText("");
   };
 
   //削除
   const handleDelete = (id: number) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
-    console.log(id);
-    console.log(inputText);
     setTodos(newTodos);
   };
   
   return (
     <div className="App">
       <div>
-        <h2>Todoリスト with Typescript</h2>
+        <h2>Todoリスト</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"
             onChange={(e) => setInputText(e.target.value)} //(e)=>handleChange(e)
             className="inputText"
             value = {inputText}
+            placeholder = "ここにタスクを入力"
           />
-          <input type="submit" value="作成" className="submitButton" />
+          <button type="submit" className="submitButton">作成</button>
         </form>
         {/* タスク追加後 */}
         <ul className="todoList">
           {todos.map((todo) => (
             <li key={todo.id}>
-              <h2>{todo.id}</h2>
+              {/* <h2>{todo.id}</h2> */}
               <input
                 type="text"
                 value={todo.inputValue}
@@ -77,4 +72,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
